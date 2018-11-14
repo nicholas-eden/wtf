@@ -313,6 +313,23 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:a741998d8633b7f444053abdf218de3d8f66dc02f832e182b983b80f8c7ba852"
+  name = "golang.org/x/crypto"
+  packages = [
+    "curve25519",
+    "ed25519",
+    "ed25519/internal/edwards25519",
+    "internal/chacha20",
+    "internal/subtle",
+    "poly1305",
+    "ssh",
+    "ssh/agent",
+  ]
+  pruneopts = "UT"
+  revision = "3d3f9f413869b949e48070b5bc593aa22cc2b8f2"
+
+[[projects]]
+  branch = "master"
   digest = "1:d6b719875cf8091fbab38527d81d34e71f4521b9ee9ccfbd4a32cff2ac5af96e"
   name = "golang.org/x/net"
   packages = [
@@ -418,6 +435,8 @@
     "github.com/yfronto/newrelic",
     "github.com/zmb3/spotify",
     "github.com/zorkian/go-datadog-api",
+    "golang.org/x/crypto/ssh",
+    "golang.org/x/crypto/ssh/agent",
     "golang.org/x/oauth2",
     "golang.org/x/oauth2/google",
     "google.golang.org/api/calendar/v3",

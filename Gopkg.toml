@@ -105,3 +105,7 @@
 [[constraint]]
   branch = "master"
   name = "code.cloudfoundry.org/bytefmt"
+
+[[constraint]]
+  branch = "master"
+  name = "golang.org/x/crypto"
