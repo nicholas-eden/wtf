@@ -15,12 +15,14 @@ var prevStats []linux.CPUStat
 // Widget define wtf widget to register widget later
 type Widget struct {
 	wtf.BarGraph
+	wtf.Remote
 }
 
 // NewWidget Make new instance of widget
 func NewWidget(app *tview.Application) *Widget {
 	widget := Widget{
-		BarGraph: wtf.NewBarGraph(app,  "Resource Usage", "resourceusage", false),
+		BarGraph: wtf.NewBarGraph(app, "Resource Usage", "resourceusage", false),
+		Remote:   wtf.NewRemote(app, "resourceusage"),
 	}
 
 	widget.View.SetWrap(true)
@@ -137,5 +139,6 @@ func (widget *Widget) Refresh() {
 /* -------------------- Unexported Functions -------------------- */
 
 func display(widget *Widget) {
+	widget.Connect()
 	MakeGraph(widget)
 }

@@ -18,9 +18,10 @@ type Remote struct {
 	User     string
 	KeyFile  string
 	Password string
+	*ssh.Client
 }
 
-func NewRemote(app *tview.Application, name string, configKey string) Remote {
+func NewRemote(app *tview.Application, configKey string) Remote {
 	var username string
 	u, err := user.Current()
 	if err == nil {
@@ -38,7 +39,7 @@ func NewRemote(app *tview.Application, name string, configKey string) Remote {
 	return remote
 }
 
-func (r *Remote) Connect() {
+func (r *Remote) Connect() (*ssh.Client, error) {
 	sshConfig := &ssh.ClientConfig{
 		User: r.User,
 		Auth: []ssh.AuthMethod{},
@@ -58,17 +59,15 @@ func (r *Remote) Connect() {
 		sshConfig.Auth = append(sshConfig.Auth, a)
 	}
 
-	connection, err := ssh.Dial("tcp", r.Host + string(r.Port), sshConfig)
+	client, err := ssh.Dial("tcp", r.Host + string(r.Port), sshConfig)
 	if err != nil {
 		log.Fatalf("Failed to connect to remote host %s: %s", r.Host, err)
-		return
+		return nil, err
 	}
 
+	r.Client = client
 
-
-
-
-
+	return client, nil
 }
 
 func publicKeyFile(file string) (ssh.AuthMethod, error) {
